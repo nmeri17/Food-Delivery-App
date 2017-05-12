@@ -1,0 +1,54 @@
+@font-face {
+  font-family: 'icomoon';
+    src: url('icomoon.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* My modifications */
+  font-size: 200%;
+  padding-right: 25%;
+  cursor: pointer;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-bell-boy:before {
+  content: "\e904";
+}
+.icon-take-away:before {
+  content: "\e905";
+}
+.icon-time:before {
+  content: "\e906";
+}
+.icon-farm-products:before {
+  content: "\e907";
+}
+.icon-people:before {
+  content: "\e908";
+}
+.icon-birthday-cake:before {
+  content: "\e900";
+}
+.icon-pizza:before {
+  content: "\e901";
+}
+.icon-soda:before {
+  content: "\e902";
+}
+.icon-soup:before {
+  content: "\e903";
+}

@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<script src="../jquery.js"> </script>
+</head>
+<body>
+
+<div id="div1"></div>
+
+<img id="drag1" src="../banner2.jpg" draggable="true" width="336" height="169">
+<script>
+var myJq = function(node, ev, cb) {
+	node = document.getElementById(node);
+	node.addEventListener(ev, cb);
+	return node;
+}
+
+myJq("drag1", "dragstart", function(e) {
+    e.dataTransfer.setData("text", e.target.id);
+});
+
+myJq("div1", "drop", function(e) {
+    e.preventDefault(); console.log("guygui")
+    var data = e.dataTransfer.getData("text");
+    $(e.target).append(data);
+});
+
+$("#div1").on("dragover", function(e) {
+	e.preventDefault();
+}).css({border: "1px solid", height: "100px", width: "50px"});
+
+
+</script>
+
+</body>
+</html>

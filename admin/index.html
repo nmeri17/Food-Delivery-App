@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="/stylesheets/admin.css">
+	<link rel="stylesheet" type="text/css" href="/stylesheets/custom-font.css">
+	<script src="/jquery.js"> </script>
+	<script src="/socket.io/socket.io.js"></script>
+
+	<!-- <link href='https://fonts.googleapis.com/css?family=News+Cycle' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Josefin+Sans' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"> -->
+
+
+	<title>Administrative Panel -- Five Star</title>
+</head>
+<body>
+	<header>
+		<h1 class="header"> FIVE STAR </h1>
+		<nav class="header">
+			<ul>
+				<li class="active-nav-item" data-name=orders>  <span class="icon-bell-boy"></span></li>
+				<li data-name=available> <span class="icon-time"></li>
+				<li data-name=staff> <span class="icon-people"></li>
+				<li data-name=foods>  <span class="icon-farm-products"> </li>
+			</ul>
+		</nav>
+		<div id="logged-in" class="header">sign out(<span id="user_name">{{username}}</span>)</div>
+	</header>
+
+	<div class="nav-anim">
+		<hr>
+		<hr>
+	</div>
+
+
+		<main>
+			<div id="orders" class="active-tab">
+				<div id="table-wrapper">
+					<table>
+						<tr>
+							<th>food</th>
+							<th>customer</th>
+							<th>location</th>
+							<th>price</th>
+							<th>ID</th>
+							<th>status</th>
+							<th>assign</th>
+							<th>estimated delivery time</th>
+						</tr>
+
+						{{orders}}
+					</table>
+
+				</div>
+			</div>
+
+			<div id="available">
+				<aside>
+					<p> selected for the day </p>
+
+					<ul></ul>
+			
+				</aside>
+
+				<section>
+					<div class="search-wrapper">
+						<label for="food-search"> <i class="fa fa-search" aria-hidden="true"></i> </label>
+						<input type="search" name="food_search" id="food-search" class="search-input" placeholder="Enter food name">
+					</div>
+
+					<form>
+						<input type="text" name="foodName" placeholder="new food name">
+						<input type=number name=price placeholder="food's price" min=2.5>
+					</form>
+
+					<div id="dnd">drag and drop food's image here </div>
+
+					<div id="progress-parent">
+						<div>
+							<div id="text-indicator"></div>
+						</div>
+					</div>
+				</section>
+			</div>
+
+			<div id="staff">
+				<p> promote user to staff </p>
+				<div class="search-wrapper">
+					<label for="user-search"> <i class="fa fa-search" aria-hidden="true"></i> </label>
+					<input type="search" name="user_search" id="user-search" class="search-input" placeholder="search user by username">
+				</div>
+
+				<section>
+					<h2> all staff </h2>
+
+					<ul></ul>
+				</section>
+			</div>
+
+			<div id="foods">
+				
+				<h3> all foods </h3>
+
+				<ul></ul>
+			</div>
+		</main>
+		<script src="/src/admin.js"> </script>
+		<script src="/src/orders.js"></script>
+
+<footer>
+
+	&copy; Copyright five star foods and restaurants onitsha 2016
+</footer>
+
+
+<div class="result-proto">
+	<p>{{name}}{{username_search}}</p> <!-- avoid explicitly setting that placeholder to `username` otherwise, it gets set while the server is rendering the output -->
+
+	<span><img src="{{food_image}}{{user_image}}"></span>
+</div>
+
+
+<div class="staff-proto">
+	<div class="staff">
+		<img src={{image}}>
+		<p> {{username_search}} </p>
+		<p> <a href="/edit?staff={{username_search}}"> Edit </a></p>
+		<span>Orders completed:<p>{{ordersCompleted}}</p></span>
+		<p> <a href="/staff/level" class="demote"> Demote </a></p>
+	</div>
+</div>
+
+
+<div class="foods-proto">
+	<div class="food-menu">
+		<img src={{image}}>
+		<p> {{name}} </p>
+		<p> {{price}} </p>
+		<p> <a href="/edit?foods={{name}}"> Edit </a></p>
+	</div>
+</div>
+
+</body>
+</html>

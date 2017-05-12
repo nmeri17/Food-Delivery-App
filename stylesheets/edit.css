@@ -1,0 +1,225 @@
+* {
+	margin: 0;
+	padding: 0;
+	text-decoration: none;
+	box-sizing: border-box;
+}
+
+a {
+	outline: none;
+}
+
+p {
+	font-family: 'Josefin Sans', sans-serif;
+	font-size: 115%;
+}
+
+body {
+	font-family: 'News Cycle', sans-serif;
+	color: #888;
+}
+
+header{	
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: flex-start;
+}
+
+header {
+    box-shadow: 0 0 8px 5px #eee;
+}
+
+h1 {
+	flex: 1 35%;
+	font-size: 220%;
+	font-family: raleway, sans-serif;
+	padding: 2% 0 0 10%;
+    z-index: 1;
+    color: #000;
+    height: 70px;
+}
+
+h1.fix {
+	width: 70%;
+}
+
+.fix {
+	background: rgba(247, 242, 242, 0.8);
+    border-bottom: 1px solid #ddd;
+	position: fixed;
+	top: 0;
+	transition: all .5s ease-in-out;
+	z-index: 99;
+}
+
+#logged-in {
+    flex: 0 25%;
+    height: 70px;
+    overflow: hidden;
+	padding: 2.5% 2% 2% 6%;
+    white-space: nowrap;
+	right: 0;
+	width: 20%
+}
+
+nav {
+    flex: 0 25%;
+    z-index: 1;
+    height: 70px;
+    overflow: hidden;
+}
+
+nav.fix {
+	right: 20%;
+}
+
+nav ul {
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: flex-end;
+	padding: 7.5% 0 0 20%;
+}
+
+nav ul li {
+	list-style: none;
+	padding: 2% 2% 2% 6%;
+	white-space: nowrap;
+	flex: 1 20%;
+	cursor: pointer;
+	color: #222;
+}
+
+.nav-anim {
+	width: inherit;
+	position: relative;
+}
+
+.nav-anim hr {
+	visibility: hidden;
+	width: 0%;
+	border: 1px solid #fb0;
+	position: absolute;
+	top: 5%;
+	left: 50%;
+	transition: all .3s ease-in-out;
+}
+
+nav li:hover .nav-anim hr:first-child {
+	left: 4%;
+	transition: all .3s ease-in-out;
+}
+
+nav li:hover .nav-anim hr {
+	visibility: visible;
+	width: 48%;
+	transition: all .3s ease-in-out;
+}
+
+nav li.active-nav-item {
+	color: #ef9a9a;
+}
+
+main {
+	display: flex;
+	flex-flow: row nowrap;
+	padding: 5% 0;
+}
+
+main > div {
+	flex: 0 25%;
+	height: 310px;
+	overflow: hidden;
+	display: flex;
+	flex-flow: row wrap;
+	border: 1px solid #ddd;
+	background: #fff;
+	z-index: 5;
+	box-shadow: 4px -1px 8px #ccc;
+}
+
+main > div img {
+	max-width: 100%;
+	max-height: 100%;
+	height: 60%;
+	float: right;
+}
+
+main > div p {
+	flex: 1 100%;
+	padding: 0 2%;
+}
+
+main > form {
+	flex: 0 76%;
+	border: 1px solid #ddd;
+	padding: 5%;
+	margin-left: -1%;
+}
+
+main > form input:not([type='submit']), select {
+	margin-bottom: 5%;
+	width: 100%;
+	height: 50px;
+	outline: none;
+	border-radius: 3%;
+	border: 1px solid #ddd;
+	box-shadow: none;
+	padding-left: 2%;
+	font-size: 105%;
+	color:#666;
+}
+
+main > form label {
+	font-size: 85%;
+	font-weight: bold;
+	text-transform: capitalize;
+}
+
+[type='file'], [type='checkbox'] {
+	height: initial !important;
+    border: none !important;
+}
+
+input[type='text']:focus {
+	transition: all .4s ease;
+	box-shadow: 0 0 10px #aaa;
+	border: none;
+}
+
+input[type='checkbox'] {
+	margin-left: -40%
+}
+
+input[type="submit"] {
+	height: 40px;
+    width: 12%;
+    margin-left: 2%;
+    border-radius: 5%;
+    border: none;
+    color: white;
+    background: orange;
+	transition: all .4s ease;
+    cursor: pointer;
+	margin-bottom: 5%;
+}
+
+input[type="submit"]:hover {
+	transition: all .4s ease;
+	background: #f44336;
+}
+
+form a {
+	background: red;
+	color: white;
+	padding: 2%;
+	border-radius: 7%;
+	font-size: 80%;
+	margin-left: 2%;
+}
+
+footer {
+	color: #888;
+	padding: 2% 5%;
+	font-size: 75%;
+	text-transform: capitalize;
+}

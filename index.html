@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="/stylesheets/fivestar_2.css">
+	<link rel="stylesheet" type="text/css" href="/stylesheets/custom-font.css">
+	<link rel='stylesheet' href='/colorbox.css'>
+	<script src="/jquery.js"> </script>
+	<script src='/colorbox.js'></script>
+	<script src="/socket.io/socket.io.js"></script>
+
+	<!--<link href='https://fonts.googleapis.com/css?family=News+Cycle' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Josefin+Sans' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+	<script src="https://code.jquery.com/jquery-1.9.1.js"></script>-->
+
+	<title> Five Star -- Home</title>
+</head>
+<body>
+<main>
+	<section>
+
+	<header>
+		<h1 class="header"> FIVE STAR </h1>
+		<nav class="header">
+			<ul>
+				<li> <a href=#auth_form id="login"> login </a></li>
+				<li> <a href=#auth_form id="register"> create new account </a></li>
+			</ul>
+		</nav>
+		<span id="logged-in" class="header">{{username}}</span>
+
+		<div id="amount" class="header"> Total amount: N<span>0.00</span> </div>
+
+	</header>
+	
+	<div class="nav-anim">
+		<hr>
+		<hr>
+	</div>
+
+		<div role=banner>
+			
+			<div id="skip-to-order"> place your order <i class="fa fa-angle-down"></i> </div>
+
+			<script src="/src/header.js"></script>
+		</div>
+
+		<div id="how-it-works">
+			<h1> how it works </h1>
+
+			<div class="how">
+				<div> <div class="how-img"> <i class="fa fa-user-plus" aria-hidden="true"></i> </div> </div>
+
+				<p> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+				tempor incididunt ut labore et dolore magna aliqua. Ut enim  irure </p>
+			</div>
+			<div class="how">
+				<div> <div class="how-img"> <i class="fa fa-check-circle" aria-hidden="true"></i> </div> </div>
+
+				<p> dolor in reprehenderit in voluptate velit esse
+				cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+				</p>
+			</div>
+			<div class="how">
+				<div> <div class="how-img fa-stack">
+				<i class="fa fa-truck fa-stack-2x" aria-hidden="true"></i>
+				<i class="fa fa-cutlery fa-stack-1x" aria-hidden="true"></i>
+				</div> </div>
+
+				<p> ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+				consequat. Duis aute proident, sunt in culpa qui officia deserunt mollit anim id est laborum. </p>
+			</div>
+
+		</div>
+
+		<div id="main-container">
+		<div role=main>
+
+			<h4> AVAILABLE TODAY <i class="fa fa-link" aria-hidden="true"></i> </h4>
+
+			<div id="food-lists">
+				<ul>
+					{{available}}
+				</ul>
+			</div>
+
+			</div>
+
+			<div id="spin">
+				<div id="frequent">
+					<h4> frequently requested <i class="fa fa-link" aria-hidden="true"></i> </h4>
+
+					<ul>
+						{{frequent}}
+					</ul>
+				</div>
+
+				<div id="combination">
+					<h4> COMBINATION SUGGESTIONS</h4>
+			
+					<ul>
+						{{combination}}
+					</ul>
+			</div>
+	</div>
+
+	</section>
+	
+<div id="auth_form">
+		<form>
+			<span class="message-text"></span>
+
+			<label for="email">email:</label> <br>
+			<input type="email" name="email" id="email"> <br>
+			<label for="password">password:</label> <br>
+			<input type="password" name="password" id="password"> <br>
+			<input type="submit" name="login" value="login"> <br>
+		</form>
+</div>
+</main>
+
+	<div id="location-div">
+		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+		quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+		consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+		cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+		proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+		</p>
+		<form>
+			<label for="recipient">recipient name:</label> <br>
+			<input type="text" name="recipient" id="recipient" required="required"> <br>
+			<label for="location">precise location:</label> <br>
+			<input type="text" name="location" id="location" required="required" placeholder="E.g 32 Tasia street"> <br>
+			<button class="button"> Place Order <span style="font-family: FontAwesome"> &#xf290;</span> </button> <br>
+		</form>
+
+		<div id=order-placed>
+			<img src="/images/order-placed.jpg">
+			<span>
+				<b>ticket ID: </b> <br>
+				<span id="ticket-id"> </span>
+				<br>
+				<p> Thank you for your patronage. Your meal will be delivered <span id="delivery-time"></span>. Remember to keep your ticket ID safe for verification.
+				</p>
+			</span>
+		</div>
+	</div>
+
+	<div id=food-cats>
+		<ul>
+		<li><div> <span class="icon-pizza"></span> snacks</div> </li>
+		<li><div> <span class="icon-birthday-cake"></span> cakes</div></li>
+		<li><div> <span class="icon-soup"></span> soups</div></li>
+		<li><div> <span class="icon-soda"></span> drinks</div></li>
+		</ul>
+	</div>
+<footer>
+
+	&copy; Copyright five star foods and restaurants onitsha 2016
+</footer>
+
+<form id="formDataSubmit">
+	<input type="hidden" name="ID">
+	<input type="hidden" name="status" value="pending">
+	<input type="hidden" name="assign" value="<a href='#confirm-assign'>nobody</a>">
+	<input type="hidden" name="orderPlaced">
+	<input type="hidden" name="orderDelivered">
+	<input type="hidden" name="estimatedDeliveryTime">
+</form>
+
+<div class="food-menu">
+	<img src={{image}}>
+	<p> {{name}} </p>
+	<p> {{price}} </p>
+	<span> add to cart <i class="fa fa-check-circle" aria-hidden="true"></i> </span>
+</div>
+
+<div class="frequent">
+	<p> {{name}} <span>{{counter}}</span></p>
+	<img src={{image}}>
+</div>
+
+		<script src="/src/core.js"></script>
+</body>
+</html>

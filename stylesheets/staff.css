@@ -1,0 +1,167 @@
+* {
+	margin: 0;
+	padding: 0;
+	text-decoration: none;
+	box-sizing: border-box;
+}
+
+a {
+	outline: none;
+}
+
+p {
+	font-family: 'Josefin Sans', sans-serif;
+	font-size: 115%;
+}
+
+body {
+	font-family: 'News Cycle', sans-serif;
+	color: #888;
+}
+
+header, main {	
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: flex-start;
+}
+
+header {
+    box-shadow: 0 0 8px 5px #eee;
+}
+
+h1 {
+	flex: 1 35%;
+	font-size: 220%;
+	font-family: raleway, sans-serif;
+	padding: 2% 0 0 10%;
+    z-index: 1;
+    color: #000;
+    height: 70px;
+}
+
+h1.fix {
+	width: 70%;
+}
+
+.fix {
+	background: rgba(247, 242, 242, 0.8);
+    border-bottom: 1px solid #ddd;
+	position: fixed;
+	top: 0;
+	transition: all .5s ease-in-out;
+	z-index: 99;
+}
+
+#logged-in {
+    flex: 0 25%;
+    height: 70px;
+    overflow: hidden;
+	padding: 2.5% 2% 2% 6%;
+    white-space: nowrap;
+	right: 0;
+	width: 20%
+}
+
+#table-wrapper {
+	margin: 10% auto;
+	box-shadow: 0 0 10px #ccc;
+	background: lightyellow;
+	border-radius: 4%;
+	overflow: hidden;
+	width: 75%;
+}
+
+table {
+	border-collapse: collapse;
+	margin-left: -1px;
+}
+
+th {
+	padding-top: 20px;
+	font-size: 80%;
+	background: #deb682;
+	color: #000;
+    text-transform: capitalize;
+    font-weight: 100;
+}
+
+tr:nth-child(2) td {
+	border-top: none;
+}
+
+td {
+	border: 1px solid #888;
+	height: 30px;
+	width: 5%;
+    font-size: 75%;
+    padding-left: 5px;
+}
+
+td:last-child {
+	border-right: none;
+}
+
+td:first-child, td:nth-child(2), td:nth-child(3) {
+	width: 10%;
+}
+
+tr:last-child td {
+	border-bottom: none;
+}
+
+td a {
+	font-weight: bold;
+}
+
+.nobody {
+	color: red;
+}
+
+.delivered {
+	color: green;
+}
+
+#confirm-assign {
+    margin: 10% 0 0 20%;
+    z-index: 9;
+    background: #f3f3f3;
+    border: 1px solid silver;
+    border-radius: 8px;
+    width: 70%;
+    max-width: 75%;
+    padding: 3%;
+    padding-top: 7%;
+    font-size: 90%;
+    display: none;
+    flex-flow: row wrap;
+    cursor: initial !important;
+}
+
+#confirm-assign span {
+	display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    flex: 1 100%;
+    padding: 10%;
+}
+
+#confirm-assign a {
+    height: 40px;
+    padding: 4%;
+    border-radius: 8%;
+    color: #fff;
+    background: #449d44;
+    padding-top: 3%;
+    flex: 0 15%;
+}
+
+#confirm-assign a:last-child {
+    background: lightslategray;
+}
+
+footer {
+	color: #888;
+	padding: 2% 5%;
+	font-size: 75%;
+	text-transform: capitalize;
+}

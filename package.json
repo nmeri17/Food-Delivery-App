@@ -1,0 +1,19 @@
+{
+  "name": "socket-chat-example",
+  "version": "0.0.1",
+  "description": "my first socket.io app",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "connect": "^3.5.0",
+    "cookie-session": "^2.0.0-alpha.2",
+    "mongoose": "^4.7.4",
+    "multer": "^1.2.1",
+    "nodemailer": "^2.7.0",
+    "nodemailer-smtp-transport": "^2.7.2",
+    "socket.io": "^1.7.1"
+  },
+  "scripts": {
+  "start": "node index.js"
+},
+"main": "index.js"
+}

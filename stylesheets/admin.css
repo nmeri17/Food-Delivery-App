@@ -1,0 +1,451 @@
+* {
+	margin: 0;
+	padding: 0;
+	text-decoration: none;
+	box-sizing: border-box;
+}
+
+a {
+	outline: none;
+}
+
+p {
+	font-family: 'Josefin Sans', sans-serif;
+	font-size: 115%;
+}
+
+input {
+	font-family: 'Josefin Sans';
+}
+
+body {
+	font-family: 'News Cycle', sans-serif;
+	color: #888;
+}
+
+header, main {	
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: flex-start;
+}
+
+header {
+    box-shadow: 0 0 8px 5px #eee;
+}
+
+h1 {
+	flex: 1 35%;
+	font-size: 220%;
+	font-family: raleway, sans-serif;
+	padding: 2% 0 0 10%;
+    z-index: 1;
+    color: #000;
+    height: 70px;
+}
+
+h1.fix {
+	width: 70%;
+}
+
+.fix {
+	background: rgba(247, 242, 242, 0.8);
+    border-bottom: 1px solid #ddd;
+	position: fixed;
+	top: 0;
+	transition: all .5s ease-in-out;
+	z-index: 99;
+}
+
+#logged-in {
+    flex: 0 25%;
+    height: 70px;
+    overflow: hidden;
+	padding: 2.5% 2% 2% 6%;
+    white-space: nowrap;
+	right: 0;
+	width: 20%
+}
+
+nav {
+    flex: 0 25%;
+    z-index: 1;
+    height: 70px;
+    overflow: hidden;
+}
+
+nav.fix {
+	right: 20%;
+}
+
+nav ul {
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: flex-end;
+	padding: 7.5% 0 0 20%;
+}
+
+nav ul li {
+	list-style: none;
+	padding: 2% 2% 2% 6%;
+	white-space: nowrap;
+	flex: 1 20%;
+	cursor: pointer;
+	color: #222;
+}
+
+.nav-anim {
+	width: inherit;
+	position: relative;
+}
+
+.nav-anim hr {
+	visibility: hidden;
+	width: 0%;
+	border: 1px solid #fb0;
+	position: absolute;
+	top: 5%;
+	left: 50%;
+	transition: all .3s ease-in-out;
+}
+
+nav li:hover .nav-anim hr:first-child {
+	left: 4%;
+	transition: all .3s ease-in-out;
+}
+
+nav li:hover .nav-anim hr {
+	visibility: visible;
+	width: 48%;
+	transition: all .3s ease-in-out;
+}
+
+nav li.active-nav-item {
+	color: #ef9a9a;
+}
+
+main > div {
+	flex: 0;
+	display: none;
+}
+
+main div.active-tab {
+	flex: 1 100%;
+	display: flex;
+}
+
+#available aside {
+	flex: 0 40%;
+	background: lightyellow;
+	padding: 5% 0 0 0;
+	font-size: 80%;
+	color: #333;
+	overflow: hidden;
+	box-shadow: 5px 0 8px 0px #eee;
+}
+
+#available aside > p {
+	text-transform: capitalize;
+}
+
+#available aside li, #search-results li {
+    list-style: none;
+    max-height: 150px;
+    height: 80px;
+    padding: 2% 5% 5% 2%;
+    position: relative;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    cursor: pointer;
+	background: lightsalmon;
+	flex: 1 100%;
+}
+
+#available aside li:nth-child(2n) {
+	background: initial;
+}
+
+#search-results li {
+    height: 40px;
+    overflow: hidden;
+    background: aliceblue;
+    padding: 1%;
+}
+
+#available aside li > p {
+	padding-top: 14%;
+}
+
+#available aside li span, #search-results li span {
+    height: 70px;
+    width: 70px;
+    overflow: hidden;
+    border-radius: 50%;
+}
+
+#search-results li span {
+    height: 30px;
+    width: 30px;
+}
+
+#available aside li span img, #search-results li span img {
+	max-height: 100%;
+}
+
+#available > section {
+	display: flex;
+	flex-flow: row wrap;
+	flex: 1 auto;
+	padding: 5%;
+	padding-bottom: 10%;
+	border-top: 1px solid wheat;
+}
+
+.search-wrapper {
+	display: flex;
+	flex-flow: row wrap;
+	position: relative;
+}
+
+.search-input {
+	height: 50px;
+	flex: 1 100%;
+	max-height: 50px;
+	border-radius: 80px;
+	border: 1px solid #ddd;
+	background: #fcfcfc;
+	outline: transparent;
+	padding-left: 10%;
+	padding-top: 2%;
+	font-size: inherit;
+	color: #888;
+}
+
+.search-inputs:focus, #available form input:focus {
+	box-shadow: 0 0 5px #eaead2;
+	border: 1px solid #eaead2;
+}
+
+#available label {
+    position: absolute;
+    height: 50px;
+    width: 2%;
+    left: 5%;
+    padding-top: 5px;
+    font-size: 140%;
+    color: #000;
+    border-right: 1px solid #ddd;
+}
+
+.search-wrapper, #dnd {
+	flex: 1 100%;
+}
+
+#search-results {
+    position: absolute;
+    top: 100%;
+    border: 1px solid #eee;
+    width: 100%;	
+    min-height: 40px;
+    font-size: 80%;
+}
+
+#dnd {
+	background-image: url("dnd.png");
+    background-repeat: no-repeat;
+    background-size: 20%;
+    background-position: center 15%;
+    background-color: rgba(238, 238, 255, 0.52);
+    border: 4px dashed #666;
+    margin-top: 10%;
+    text-transform: capitalize;
+	padding: 20% 15% 20% 18%;
+    font-size: 160%;
+}
+
+#available > section > form {
+	flex: 1 auto;
+	margin-top: 10%;
+}
+
+#available form input {
+	width: 100%;
+	height: 40px;
+	margin-top: 2%;
+	padding-left: 2%;
+	background: #f2f2f2;
+	border: none;
+	outline: transparent;
+}
+
+#progress-parent {
+    height: 30px;
+    border: 1px solid #888;
+    box-shadow: inset 0 0 14px #bbb;
+    background: #eee;
+    border-radius: 5px;
+    flex: 1 100%;
+    margin-top: 5%;
+    overflow: hidden;
+    position: relative;
+}
+
+#progress-parent > div {
+	width: 0;
+	background: #fb0;
+	height: inherit;
+    box-shadow: inherit;
+    transition: all .7s ease-in-out;
+}
+
+#text-indicator {
+	position: absolute;
+	left: 50%;
+	top: 20%;
+}
+
+/*==========ORDERS TAB BEGINS HERE==========*/
+
+#table-wrapper {
+	margin: 10% auto;
+	box-shadow: 0 0 10px #ccc;
+	background: lightyellow;
+	border-radius: 4%;
+	overflow: hidden;
+	width: 75%;
+}
+
+table {
+	border-collapse: collapse;
+	margin-left: -1px;
+}
+
+th {
+	padding-top: 20px;
+	font-size: 80%;
+	background: #deb682;
+	color: #000;
+    text-transform: capitalize;
+    font-weight: 100;
+}
+
+tr:nth-child(2) td {
+	border-top: none;
+}
+
+td {
+	border: 1px solid #888;
+	height: 30px;
+	width: 5%;
+    font-size: 75%;
+    padding-left: 5px;
+}
+
+td:last-child {
+	border-right: none;
+}
+
+td:first-child, td:nth-child(2), td:nth-child(3) {
+	width: 10%;
+}
+
+tr:last-child td {
+	border-bottom: none;
+}
+
+/*====== FOODS TAB BEGINS HERE ===== */
+
+#foods {
+	flex-flow: row wrap;
+    padding: 3% 7%;
+}
+
+.food-menu, .staff {
+    flex: 1 30%;
+    height: 350px;
+    border-radius: 10px;
+    background: #ffffe4;
+    margin-top: 3%;
+    overflow: hidden;
+    box-shadow: 0 0 7px #ccc;
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.food-menu:not(first-child), .staff:not(first-child) {
+	margin-left: 5%;
+}
+
+.food-menu img, .staff img {
+	max-width: 100%;
+	max-height: 100%;
+	height: 70%;
+}
+
+.food-menu p, .staff p {
+	flex: 1 50%;
+	font-size: 90%;
+}
+
+.food-menu p:nth-child(2) {
+	font-weight: bold;
+	text-transform: capitalize;
+	padding-left: 2%;
+}
+
+.food-menu p:nth-child(3) {
+	text-align: right;
+	padding-right: 2%;
+}
+
+.food-menu span {
+	flex: 1;
+	padding-right: 4%;
+	font-size: 90%;
+	text-align: right;
+}
+
+/*====== STAFF TAB BEGINS HERE ===== */
+
+#staff {
+	flex-flow: row wrap;
+	padding: 5% 10%;
+}
+
+#staff p {
+    text-transform: capitalize;
+    margin-bottom: 3%;
+}
+
+#staff .search-wrapper {
+    margin-bottom: 10%;
+}
+
+#staff .search-input {
+	font-size: 80%;
+}
+
+#staff h3 {
+	text-transform: capitalize;
+}
+
+#staff section {
+    flex: 1 100%;
+}
+
+main ul {
+	display: flex;
+	flex-flow: row wrap;
+}
+
+main li {
+	list-style: none;
+	flex: 1 30%;
+}
+
+footer {
+	color: #888;
+	padding: 2% 5%;
+	font-size: 75%;
+	text-transform: capitalize;
+}
