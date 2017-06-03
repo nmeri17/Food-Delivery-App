@@ -16,7 +16,6 @@ query = require("querystring"),
 app = connect(),
 staticPaths = require("./lib/valid-directories") (path.join(__dirname + "/public/")),
 dissectURL = require("./lib/dissect"),
-//onIndexLoad = require("./lib/index-load"),
 regexCb = require('./lib/regex-callback'),
 component = require('./lib/render-component'),
 usersModel = require("./models/users"),
@@ -42,6 +41,7 @@ db.once('open', function() {
 */
 
 // init accounts once
+// the ist one is for admin, 2nd for staff and 3rd for customer
 /*var arr = ["cookforme@fivestar.com", "vainglories17@gmail.com", "nmeri17@gmail.com"];
 
 for (var i = 0; i < arr.length; i++) {
@@ -59,7 +59,7 @@ usersModel.findOneAndUpdate({email: "cookforme@fivestar.com"}, {staffStatus: "ad
 	console.log(doc)
 })
 */
-
+ordersModel.findOneAndRemove({customer: 'liza essien'}).exec()
 });
 
 
@@ -75,17 +75,18 @@ app = app.use(bodyParser)
 .use("/search/", search)
 .use("/edit/", edit)
 .use("/staff/level/", level)
+.use("/admin/order/", order)
 .use("/staff/assign", assign)
+.use("/staff/delivered/", delivered)
 .use("/staff/profiles", profiles)
 .use("/staff/messages/", messages)
-.use("/admin/order/", order)
-.use("/staff/delivered/", delivered)
 .use("/admin/foods/", foods)
 .use("/admin/available/", available)
 .use("/admin/staffs/", allStaff);
 
 
 function proxy (req, res, next) {
+
 render.username = req.session.username;
 
 	foodsModel.find({availableToday: true}, function(err, docs) {
@@ -116,7 +117,8 @@ render.username = req.session.username;
 
 			headers.push(temp[1])
 		}
-ordersModel.remove({estimatedDeliveryTime: null}).exec()
+		
+		//ordersModel.remove({estimatedDeliveryTime: null}).exec()
 		ordersModel.find({}).sort('-orderPlaced').exec(function(err, allOrders) {
 			if (err) throw err;
 
@@ -539,11 +541,12 @@ function order (req, res, next) {
 				requested, or fetch a random order from the same location's estimated time, but something
 				could go wrong with that random request picked and cause it to take longer or shorter than usual
 				*/
+
 				var body = req.body,
 				locality = decodeURIComponent(body.location),
 
 				// replace street and road
-				precise = locality.replace(/(street|road|onitsha|onicha)+?/gi, '').trim(),
+				precise = locality.replace(/(street|road|onitsha|onicha|junction)+?/gi, '').trim(),
 
 				/* grab the last part of a string--preceded by a comma or space, then containing any word delimited
 				(or not) by a hyphen */
@@ -561,14 +564,15 @@ function order (req, res, next) {
 					* otherwise average the others
 					*/
 					if (docs.length > 0 && endRes ==  undefined) {
-					
+
 						if (docs.length === 1) {
 							pioneerOrder = docs[0].toObject()
-							deliveryTime = new Date(pioneerOrder.orderDelivered).getMinutes() - new Date(pioneerOrder.orderPlaced).getMinutes();
+							deliveryTime = new Date().setMinutes(new Date(pioneerOrder.orderDelivered).getMinutes() - new Date(pioneerOrder.orderPlaced).getMinutes());
+							deliveryTime = new Date(deliveryTime).getMinutes();
 
 							ordersModel.findOneAndUpdate({customer: update.customer, ID: update.ID},
 								{estimatedDeliveryTime: deliveryTime},
-								{new: true}, function (err, update) { console.log('just one')
+								{new: true}, function (err, update) {
 									 updateEstimatedTime(update, true)
 							});
 						}
@@ -576,7 +580,7 @@ function order (req, res, next) {
 							ordersModel.find(queryObj)
 							.then(function(liveList) {
 
-								liveList = liveList.filter(e => e.estimatedDeliveryTime != null) /*using this line since the order is
+								liveList = liveList.filter(e => e.status == 'delivered') /*using this line since the order is
 								initialized/saved without an estimated time. Assuming I required the estimated delivery time first, then entering all
 								columns in one go i.e while saving the order, this line will be needless
 
@@ -586,11 +590,11 @@ function order (req, res, next) {
 								var average = 0;
 
 								for (var j =0; j < liveList.length; j++) {
-									average += new Date(liveList[j].orderDelivered).getTime() - new Date(liveList[j].orderPlaced).getTime();
+									var tempAverage = new Date().setMinutes(new Date(liveList[j].orderDelivered).getMinutes() - new Date(liveList[j].orderPlaced).getMinutes());
+									average += new Date(tempAverage).getMinutes();
 								}
 
-
-								update.estimatedDeliveryTime = new Date(average/liveList.length).getMinutes();
+								update.estimatedDeliveryTime = average/liveList.length;
 								
 								ordersModel.findOneAndUpdate({customer: update.customer, ID: update.ID},
 									{estimatedDeliveryTime: update.estimatedDeliveryTime},
@@ -602,7 +606,7 @@ function order (req, res, next) {
 						}
 					}
 					else if (endRes == true) {
-						console.log(update)
+						
 						// client is expecting ticket id and estimated time
 						resObj['deliveryTime'] = update.estimatedDeliveryTime;
 
@@ -623,13 +627,15 @@ function order (req, res, next) {
 			// prepare id for response
 			resObj['ticketId'] = body.ID;
 
-			new ordersModel (body).save().then(function(newOrder) {
+			new ordersModel(body).save(function(err, newOrder) {
+				if (err) throw err;
+
 				updateEstimatedTime(newOrder);
 			});
 		}); // close multer incoming form handler
 	}
 	
-	// user not signed in and bypassed front end hook
+	// user not signed in but bypassed front end hook
 	else {
 		res.writeHead(302, {Location: "http://localhost:1717/login"});
 		res.end();
@@ -716,7 +722,7 @@ function delivered(req, res, next) {
 		else if (order != null && order.assign == `<a href=/staff/profiles/${req.session.username}>${req.session.username}</a>`) {
 			ordersModel.findOneAndUpdate(orderToDeliver, {orderDelivered: new Date(), status: "delivered"}, {fields: "assign ID"}, function(err, order) {
 				if (err) throw err;
-
+console.log('delivered')
 				res.writeHead(200, {"Content-Type": "application/json"});
 				res.end(JSON.stringify(orderToDeliver));
 			});
@@ -796,7 +802,7 @@ function profiles(req, res, next) {
 
 					if (req.session.username == profile) {
 
-						// for some really REALLY dumb reason, http.get couldnt help me make a request to contacts
+						// for some really REALLY dumb reason, http.get couldnt help with making a request to contacts
 						usersModel.find({staffStatus: /[^user]/gi}, "username", function(err, contacts) {
 							var newContacts = []
 
@@ -963,6 +969,7 @@ else if(toSearch.user_search !== undefined) {
 function assign (req, res, next) {
 	if (req.method == "POST") {
 		if (req.session.username !== undefined) {
+
 			ordersModel.findOneAndUpdate({customer: decodeURIComponent(req.body.customer), ID: req.body.ID},
 				{assign: "<a href=/staff/profiles/" + req.session.username +">" + req.session.username + "</a>", status: "assigned"},
 				{new: true},
@@ -970,10 +977,12 @@ function assign (req, res, next) {
 				if (err) throw err;
 
 				if (order != null) {
+					console.log('order assigned')
+
 					res.writeHead(200, {"Content-Type": "application/json"});
 					res.end(JSON.stringify(order));
 				}
-				else res.end('odrer is null');
+				else res.end('order is null');
 			})
 		}
 		else {

@@ -1,0 +1,7 @@
+first run mongod with the flag --config or -f and pass it the string to the config
+file so it starts running on that port
+
+in another command prompt, run mongo with the flag --port and pass the
+desired port
+
+that is, before starting your own mongoose app
